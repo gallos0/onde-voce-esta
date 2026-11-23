@@ -17,3 +17,7 @@ História em 35 fases:
 - 35: a expulsão do jardim e o fim.
 
 Qualidade gráfica: ultra (computador, com pós-processamento), alto (celular) e leve. A resolução se ajusta sozinha.
+
+Arte e voz:
+- Personagens, animais e cenários pintados a partir das folhas de conceito enviadas pelo autor do jogo (pasta img/).
+- Narração gerada com o Kokoro-82M (licença Apache-2.0), voz pm_alex em português e bm_george em inglês, com o tom engrossado e um pouco de eco (pasta voice/).
