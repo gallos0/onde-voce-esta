@@ -21,3 +21,8 @@ Qualidade gráfica: ultra (computador, com pós-processamento), alto (celular) e
 Arte e voz:
 - Personagens, animais e cenários pintados a partir das folhas de conceito enviadas pelo autor do jogo (pasta img/).
 - Narração gerada com o Kokoro-82M (licença Apache-2.0), voz pm_alex em português e bm_george em inglês, com o tom engrossado e um pouco de eco (pasta voice/).
+
+## App no iPhone
+
+- **Pelo Safari (mais simples):** abra o site, toque em Compartilhar → *Adicionar à Tela de Início*. O jogo abre em tela cheia, com ícone próprio, e funciona offline depois da primeira vez.
+- **App nativo (.ipa):** o workflow `iOS app (.ipa)` compila `ios-app/` (Capacitor) num Mac do GitHub a cada atualização do jogo e publica o arquivo na release `ios`. O .ipa sai sem assinatura: instale com Sideloadly ou AltStore usando seu Apple ID, ou abra `ios-app/ios/App/App.xcodeproj` no Xcode, escolha seu time em *Signing* e rode no iPhone.

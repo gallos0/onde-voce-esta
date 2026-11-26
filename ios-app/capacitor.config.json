@@ -1,0 +1,7 @@
+{
+  "appId": "io.github.gallos0.ondevoceesta",
+  "appName": "Onde Você Está?",
+  "webDir": "www",
+  "backgroundColor": "#0b1a0e",
+  "ios": { "scrollEnabled": false, "contentInset": "never", "backgroundColor": "#0b1a0e", "allowsLinkPreview": false, "preferredContentMode": "mobile" }
+}

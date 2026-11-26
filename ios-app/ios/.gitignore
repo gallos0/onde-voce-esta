@@ -1,0 +1,10 @@
+App/build
+App/Pods
+App/output
+DerivedData
+xcuserdata
+capacitor-cordova-ios-plugins
+# the game itself is copied in by the build workflow from the site root
+App/App/public/*
+!App/App/public/cordova.js
+!App/App/public/cordova_plugins.js

@@ -1,0 +1,16 @@
+{
+  "name": "onde-voce-esta-ios",
+  "version": "1.0.0",
+  "description": "iOS app wrapper (Capacitor) for ONDE VOC\u00ca EST\u00c1?",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@capacitor/core": "^8.6.3",
+    "@capacitor/ios": "^8.6.3"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^8.6.3"
+  }
+}

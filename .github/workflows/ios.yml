@@ -1,0 +1,52 @@
+name: iOS app (.ipa)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['index.html', 'en.html', 'img/**', 'voice/**', 'ios-app/**', '.github/workflows/ios.yml']
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Copy the game into the app
+        run: |
+          P=ios-app/ios/App/App/public
+          cp index.html en.html manifest.webmanifest icon-*.png "$P"/ 2>/dev/null || cp index.html en.html "$P"/
+          cp -R img voice "$P"/
+          ls "$P"
+
+      - name: Build (unsigned)
+        run: |
+          cd ios-app/ios/App
+          xcodebuild -project App.xcodeproj -scheme App -configuration Release \
+            -sdk iphoneos -destination 'generic/platform=iOS' -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" build | tail -30
+
+      - name: Package .ipa
+        run: |
+          mkdir -p out/Payload
+          cp -R ios-app/ios/App/build/Build/Products/Release-iphoneos/App.app out/Payload/
+          cd out && zip -qry OndeVoceEsta.ipa Payload && ls -la
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: OndeVoceEsta-ipa
+          path: out/OndeVoceEsta.ipa
+
+      - name: Publish to the "ios" release and the ios-build branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete ios --yes --cleanup-tag || true
+          gh release create ios out/OndeVoceEsta.ipa --title "App iOS (.ipa)" \
+            --notes "Build automático do jogo para iPhone/iPad, sem assinatura. Instale com Sideloadly ou AltStore (Apple ID gratuito) ou assine no Xcode."
+          git config user.name "github-actions" && git config user.email "actions@github.com"
+          git checkout --orphan ios-build && git rm -rfq . && cp out/OndeVoceEsta.ipa . && git add OndeVoceEsta.ipa
+          git commit -qm "iOS build ${GITHUB_SHA::7}" && git push -fq origin ios-build
